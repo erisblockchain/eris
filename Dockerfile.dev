@@ -1,0 +1,7 @@
+FROM ubuntu:18.04
+
+ENV TERM dumb
+
+COPY . /src
+RUN apt update && apt install -y sudo git curl
+RUN cd /src && git submodule update --init --recursive && yes 1 | ./eosio_build.sh
