@@ -5,7 +5,7 @@
 namespace eosiosystem {
 
    const int64_t  min_pervote_daily_pay = 100'0000;
-   const int64_t  min_activated_stake   = 150'000'000'0000;
+   const int64_t  min_activated_stake   = 1'000'000'0000;
    const double   continuous_rate       = 0.04879;          // 5% annual rate
    const double   perblock_rate         = 0.0025;           // 0.25%
    const double   standby_rate          = 0.0075;           // 0.75%
@@ -72,7 +72,7 @@ namespace eosiosystem {
       eosio_assert( prod.active(), "producer does not have an active key" );
 
       eosio_assert( _gstate.total_activated_stake >= min_activated_stake,
-                    "cannot claim rewards until the chain is activated (at least 15% of all tokens participate in voting)" );
+                    "cannot claim rewards until the chain is activated (at least 1,000,000 of tokens have been staked voting)" );
 
       auto ct = current_time();
 
