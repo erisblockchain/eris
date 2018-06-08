@@ -6,19 +6,19 @@
 # Copyright (c) 2017, Respective Authors all rights reserved.
 #
 # After June 1, 2018 this software is available under the following terms:
-# 
+#
 # The MIT License
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in
 # all copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -41,7 +41,7 @@
 	fi
 
    	function usage()
-   	{ 
+   	{
 		printf "\\tUsage: %s \\n\\t[Build Option -o <Debug|Release|RelWithDebInfo|MinSizeRel>] \\n\\t[CodeCoverage -c ] \\n\\t[Doxygen -d] \\n\\t[CoreSymbolName -s <1-7 characters>]\\n\\n" "$0" 1>&2
 		exit 1
 	}
@@ -52,7 +52,7 @@
 	DISK_MIN=20
 	DOXYGEN=false
 	ENABLE_COVERAGE_TESTING=false
-	CORE_SYMBOL_NAME="SYS"
+	CORE_SYMBOL_NAME="ERI"
 	TEMP_DIR="/tmp"
 	TIME_BEGIN=$( date -u +%s )
 	VERSION=1.2
@@ -93,7 +93,7 @@
 					printf "\\n\\tInvalid Option: %s\\n" "-${OPTARG}" 1>&2
 					usage
 					exit 1
-				;;		
+				;;
 				: )
 					printf "\\n\\tInvalid Option: %s requires an argument.\\n" "-${OPTARG}" 1>&2
 					usage
@@ -129,7 +129,7 @@
 	printf "\\n\\tARCHITECTURE: %s\\n" "${ARCH}"
 
 	if [ "$ARCH" == "Linux" ]; then
-		
+
 		if [ ! -e /etc/os-release ]; then
 			printf "\\n\\tEOSIO currently supports Amazon, Centos, Fedora, Mint & Ubuntu Linux only.\\n"
 			printf "\\tPlease install on the latest version of one of these Linux distributions.\\n"
@@ -141,9 +141,9 @@
 			printf "\\tExiting now.\\n"
 			exit 1
 		fi
-	
+
 		OS_NAME=$( cat /etc/os-release | grep ^NAME | cut -d'=' -f2 | sed 's/\"//gI' )
-	
+
 		case "$OS_NAME" in
 			"Amazon Linux AMI")
 				FILE="${PWD}/scripts/eosio_build_amazon.sh"
@@ -224,17 +224,17 @@
 			exit 1;
 		fi
 	fi
-	
+
 	if ! cd "${BUILD_DIR}"
 	then
 		printf "Unable to enter build directory %s.\\n Exiting now.\\n" "${BUILD_DIR}"
 		exit 1;
 	fi
-	
+
 	if [ -z "$CMAKE" ]; then
 		CMAKE=$( command -v cmake )
 	fi
-	
+
 	if ! "${CMAKE}" -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" -DCMAKE_CXX_COMPILER="${CXX_COMPILER}" \
 		-DCMAKE_C_COMPILER="${C_COMPILER}" -DWASM_ROOT="${WASM_ROOT}" -DCORE_SYMBOL_NAME="${CORE_SYMBOL_NAME}" \
 		-DOPENSSL_ROOT_DIR="${OPENSSL_ROOT_DIR}" -DBUILD_MONGO_DB_PLUGIN=true \
@@ -249,7 +249,7 @@
 		printf "\\n\\t>>>>>>>>>>>>>>>>>>>> MAKE building EOSIO has exited with the above error.\\n\\n"
 		exit -1
 	fi
-	
+
 	TIME_END=$(( $(date -u +%s) - ${TIME_BEGIN} ))
 
 	printf "\n\n${bldred}\t _______  _______  _______ _________ _______\n"
@@ -263,7 +263,7 @@
 
 	printf "\\n\\tEOSIO has been successfully built. %02d:%02d:%02d\\n\\n" $(($TIME_END/3600)) $(($TIME_END%3600/60)) $(($TIME_END%60))
 	printf "\\tTo verify your installation run the following commands:\\n"
-	
+
 	print_instructions
 
 	printf "\\tFor more information:\\n"
@@ -272,7 +272,7 @@
 	printf "\\tEOSIO resources: https://eos.io/resources/\\n"
 	printf "\\tEOSIO Stack Exchange: https://eosio.stackexchange.com\\n"
 	printf "\\tEOSIO wiki: https://github.com/EOSIO/eos/wiki\\n\\n\\n"
-				
+
 	if [ "x${EOSIO_BUILD_PACKAGE}" != "x" ]; then
 	  # Build eos.io package
 		if ! "$CMAKE" -DCMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}" -DCMAKE_CXX_COMPILER="${CXX_COMPILER}" \
