@@ -1,7 +1,7 @@
 # TODO: remove this dependency
 FROM eosio/builder as builder
 
-ARG branch=eris-v1.0.2.2
+ARG branch=master
 ARG symbol=ERI
 
 COPY . /src
